@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HelpComfort - Cadastro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+    }
+
+    header {
+      margin-top: 0;
+    }
+
+    .detalhe {
+      height: 30px;
+      background-color: #3D3A3A;
+    }
+
+    #menu-h {
+      list-style-type: none;
+      padding: 0;
+      background-color: #D9D9D9;
+      padding-left: 460px;
+      display: flex;
+      align-items: center;
+    }
+
+    #menu-h li {
+      display: inline-block;
+      padding: 10px;
+      align-items: center;
+    }
+
+    #menu-h li a {
+      display: inline-block;
+      padding: 10px;
+      text-decoration: none;
+      font-weight: 300;
+      color: #3D3A3A;
+      transition: background .6s;
+    }
+
+    #menu-h li a:hover {
+      background-color: #3D3A3A;
+      color: #D9D9D9;
+    }
+
+    #menu-h li a.red {
+      color: #CB1A1A;
+      font-weight: 500;
+    }
+
+    #menu-h li a img {
+      vertical-align: middle;
+      width: 24px; 
+      height: 24px; 
+      margin-left: 10px; 
+    }
+
+    h1 {
+      font-weight: 800;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .form-wrapper {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 600px;
+      margin-top: 40px;
+    }
+
+    .form-container form {
+      width: 100%;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      background-color: #f0f0f0;
+      box-sizing: border-box;
+      display: block;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #000000;
+      color: #fff;
+      cursor: pointer;
+      font-family: "Poppins", sans-serif;
+      width: 100%;
+      margin-top: 10px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #333;
+      transform: scale(1.05);
+    }
+
+    #esqueci {
+      text-decoration: none;
+      color: #000000;
+      font-weight: 700;
+      font-size: 13px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .home {
+      font-size: small;
+      font-weight: 300;
+      margin-left: 30px;
+      text-decoration: none;
+      color: #000000;
+    }
+
+    .action-btns {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .login-btn {
+      text-align: center;
+      display: none;
+      margin-top: 20px;
+    }
+
+    .login-btn button {
+      background-color: #007bff;
+      color: #fff;
+      border: 1px solid #0056b3;
+    }
+
+    .login-btn button:hover {
+      background-color: #0056b3;
+      border-color: #004085;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="detalhe"></div>
+    <ul id="menu-h">
+      <li><a href="#">HOMEM</a></li>
+      <li><a href="#">MULHER</a></li>
+      <li><a href="#">NOSSA TECNOLOGIA</a></li>
+      <li><a href="#" class="red">SALE</a></li>
+      <li><a href="#">AJUDA</a></li>
+      <li>
+        <a href="#" id="searchToggle">
+          <img src="images/lupa.png" alt="Lupa">
+        </a>
+        <div id="searchBox" style="display: none;">
+          <input type="text" placeholder="Pesquisar...">
+        </div>
+      </li>
+      <li><a href="#"><img src="images/sacola-de-compras.png" alt="Sacola"></a></li>
+      <li><a href="index 2.html"><img src="images/do-utilizador.png" alt="Perfil"></a></li>
+    </ul>
+    <a href="index 2.html" class="home">HOME > <b>CADASTRO</b></a>
+  </header>
+
+  <div class="form-wrapper">
+    <div class="form-container">
+      <form id="registro-form">
+        <h1>CADASTRE-SE</h1>
+        <label for="Nome">Nome:</label>
+        <input type="text" id="Nome" name="Nome" required>
+
+        <label for="Senha">Senha:</label>
+        <input type="password" id="Senha" name="Senha" required>
+
+        <label for="Telefone">Telefone:</label>
+        <input type="text" id="Telefone" name="Telefone" required>
+
+        <label for="Email">Email:</label>
+        <input type="email" id="Email" name="Email" required>
+
+        <a href="#" id="esqueci">Esqueci minha senha</a>
+        <button type="submit" id="cadastro">Cadastrar</button>
+      </form>
+
+      <div class="action-btns" id="acessoRestritoBtnWrapper">
+        <button onclick="window.location.href='loginfunc.html'">Acesso Restrito</button>
+      </div>
+
+      <div class="action-btns login-btn" id="loginBtnWrapper">
+        <button onclick="window.location.href='login.html'">Ir para Login</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('registro-form');
+        const acessoRestritoBtnWrapper = document.getElementById('acessoRestritoBtnWrapper');
+        const loginBtnWrapper = document.getElementById('loginBtnWrapper');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio real do formulário
+
+            const nome = document.getElementById('Nome').value;
+            const senha = document.getElementById('Senha').value;
+            const telefone = document.getElementById('Telefone').value;
+            const email = document.getElementById('Email').value;
+
+            const data = { nome, senha, telefone, email };
+
+            fetch('http://localhost:5262/api/Clientes', { // Endpoint para cadastrar cliente
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(`Erro ao cadastrar cliente: ${text}`);
+                    });
+                }
+                return response.json();
+            })
+            .then(cliente => {
+                console.log('Sucesso: Você foi cadastrado', cliente);
+                alert("Você foi cadastrado com sucesso");
+                acessoRestritoBtnWrapper.style.display = 'none'; 
+                loginBtnWrapper.style.display = 'block'; 
+                form.reset(); 
+            })
+            .catch(error => {
+                console.error('Erro: Houve algum problema no seu cadastro', error);
+                alert(`Houve algum problema ao tentar cadastrar: ${error.message}`);
+            });
+        });
+    });
+  </script>
+</body>
+</html>
+
+

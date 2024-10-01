@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+    }
+    .pagina_produto {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+    .detalhe {
+        margin-top: 0;
+        height: 30px;
+        background-color: #3D3A3A;
+    }
+    #menu-h {
+        margin-top: 0;
+        list-style-type: none;
+        padding: 0;
+        background-color: #D9D9D9;
+        padding-left: 460px;
+        display: flex;
+        align-items: center;
+    }
+    #menu-h li {
+        display: inline-block;
+        padding: 10px;
+        align-items: center;
+    }
+    #menu-h li a {
+        display: inline-block;
+        padding: 10px;
+        text-decoration: none;
+        font-weight: 300;
+        color: #3D3A3A;
+        transition: background .6s;
+    }
+    #menu-h li a:not(:has(img)):hover {
+        background-color: #3D3A3A;
+        color: #D9D9D9;
+    }
+    #menu-h li a:active {
+        background-color: #3D3A3A;
+        color: #D9D9D9;
+    }
+    #menu-h li a.red {
+        color: #CB1A1A;
+        font-weight: 500;
+    }
+    #menu-h li a img {
+        vertical-align: middle;
+        width: 24px; 
+        height: 24px; 
+        margin-left: 10px; 
+    }
+    #searchOverlay {
+        position: fixed;
+        top: 56px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 56px); 
+        background-color: rgba(0, 0, 0, 0.5); 
+        display: none;
+    }
+    .content {
+        display: flex;
+        flex: 1;
+    }
+    .left, .right {
+        flex: 1;
+        display: flex;
+    }
+    .left {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        position: relative;
+        padding: 20px 60px 20px 70px; 
+    }
+    .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; 
+        align-items: center; 
+        padding: 20px; 
+    }
+    .small-images {
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px; 
+    }
+    .small-images img {
+        margin-bottom: 10px;
+        width: 100px;
+        height: 150px;
+        opacity: 0.7; 
+        cursor: pointer; 
+    }
+    .large-image img {
+        width: 440px;
+        height: 600px;
+    }
+    .home {
+        font-size: small;
+        font-weight: 300;
+        margin-left: 30px;
+        text-decoration: none;
+        color: #000000;
+    }
+    .title {
+        font-weight: bold;
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .price-parcelado {
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .price-total {
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .title {
+        font-weight: 600;
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 10px;
+        color: #696865;
+    }
+    .price-parcelado {
+        font-size: 12px;
+        text-align: center;
+        margin-bottom: 5px; 
+    }
+    .price-total {
+        font-size: 20px;
+        font-weight: 400;
+        text-align: center;
+    }
+    .text-baixo {
+        text-align: center;
+        font-size: 16px;
+        margin-top: 10px; 
+    }
+    .buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px; 
+    }
+    .button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #E9EFEF;
+        color: black;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 0 10px; 
+        font-family: 'Poppins', sans-serif;
+    }
+    .button:hover {
+        background-color: #a0a1a1;
+    }
+    .button img {
+        margin-right: 5px; 
+    }
+    .icon {
+        width: 30px;
+    }
+    .size-selector {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .size-selector label {
+        display: block;
+        margin: 0 10px;
+        cursor: pointer;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 10px 20px;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+    .size-selector input[type="radio"] {
+        display: none;
+    }
+    .size-selector input[type="radio"]:checked + label {
+        background-color: #CB1A1A;
+        color: #fff;
+        border-color: #CB1A1A;
+    }
+    .buy-button {
+        display: block;
+        width: 61%;
+        background-color: #000000;
+        color: white;
+        border: none;
+        padding: 15px 0;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-family: 'Poppins', sans-serif;
+    }
+    .buy-button:hover {
+        background-color: #625d5d;
+    }
+    .section {
+        background-color: #fff;
+        border: 1px solid #000000;
+        padding: 20px;
+        position: relative;
+        width: 55%;
+    }
+    .section-title {
+        font-size: 16px;
+        font-weight: 700;
+        align-items: center;
+        justify-content: center;
+    }
+    .section-content {
+        font-weight: 400;
+    }
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+        justify-content: center;
+        align-items: center;
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 800px;
+        position: relative;
+        text-align: center;
+    }
+    .modal-content img {
+        width: 100%;
+        height: auto;
+    }
+    .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ccc;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .close-modal:hover {
+        background-color: #999;
+    }
+</style>
+</head>
+<body class="pagina_produto">
+    <header>
+        <div class="detalhe"></div>
+        <ul id="menu-h">
+            <li><a href="index 1.html">HOMEM</a></li>
+            <li><a href="index 3.html">MULHER</a></li>
+            <li><a href="#">NOSSA TECNOLOGIA</a></li>
+            <li><a href="#" class="red">SALE</a></li>
+            <li><a href="#">AJUDA</a></li>
+            <li>
+                <a href="#" id="searchToggle">
+                    <img src="images/lupa.png" alt="Lupa">
+                </a>
+                
+            </li>
+            <li><a href="carrinho.html"><img src="images/sacola-de-compras.png" alt="Sacola"></a></li>
+            <li><a href="index 2.html"><img src="images/do-utilizador.png" alt="Perfil"></a></li>
+        </ul>
+        <a href="index 1.html" class="home">HOME > <b>COMFORT CAMISETA</b></a>
+    </header>
+    <div class="content">
+        <div class="left">
+            <div class="small-images">
+                <img src="images/mulher5de.jpg" alt="Imagem Pequena 1" onclick="swapImages(this)">
+                <img src="images/mulherr5.jpg" alt="Imagem Pequena 2" onclick="swapImages(this)">
+                <img src="images/detalhemulher5.jpg" alt="Imagem Pequena 3" onclick="swapImages(this)">
+            </div>
+            <div class="large-image">
+                <img id="largeImage" src="images/mulher5.jpg" alt="Imagem Grande">
+            </div>
+        </div>
+        <div class="right">
+            <div class="title">JAQUETA RUN</div>
+            <br>
+            <div class="price-parcelado">10x R$ 34,90</div>
+            <div class="price-total">R$ 349,00</div>
+            <br><br>
+            <div class="buttons">
+                <button class="button" onclick="openModal()"><img src="images/cabide.png" alt="Icon 2" class="icon"> TABELA DE MEDIDAS</button>
+            </div>
+            <div class="size-selector">
+                <input type="radio" id="p" name="size" value="P">
+                <label for="p">P</label>
+                <input type="radio" id="m" name="size" value="M">
+                <label for="m">M</label>
+                <input type="radio" id="g" name="size" value="G">
+                <label for="g">G</label>
+                <input type="radio" id="gg" name="size" value="GG">
+                <label for="gg">GG</label>
+                <input type="radio" id="xg" name="size" value="XG">
+                <label for="xg">XG</label>
+            </div>
+            <button class="buy-button" id="COMPRAR">COMPRAR</button>
+            <br><br>
+            <div class="section">
+                <div class="section-title">DESCRIÇÃO</div>
+                <div class="section-content">
+                    <p>Jaqueta manga longa com abertura para dedo, modelagem slim fit e recortes anatômicos.
+                        Design de alta Performance tecnológica.
+                        Tecido com superfície texturizada que auxilia na respirabilidade.
+                        tura: toque macio, suave e alta respirabilidade, proporcionando extremo conforto e liberdade de movimentos duranto o uso. 
+                        <br><br>
+                        Feito no Brasil.
+                        <br><br>
+                        Modelo veste tamanho P <br><br>
+                        Código do produto: 1.61647.G.00BC01</p>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-title">DETALHES TÉCNICOS</div>
+                <div class="section-content">
+                    <p>Tecido: Merged Skin
+
+                        <br><br>
+
+                        PORQUE AMAMOS: <br>
+                        Sua construção é discretamente vazada que ajuda na passagem do ar, mantendo a pele fresca durante práticas esportivas. Super prático nos cuidados diários com Easy Care e mantém o corpo seco com a tecnologia Quick Dry.
+                        <br><br>
+                        COMO É:<br>
+                        Tecido feito de Poliamida e Elastano com superfície texturizada.
+                        <br><br>
+                        DICAS TEAM COMFORT!<br>
+                        Perfeito para compor looks: aposte em looks casuais!
+                        <br><br>
+                        INDICADO PARA:<br>
+                        Academia e casual.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img src="images/medidas.png" alt="Tabela de Medidas">
+    </div>
+</div>
+<script>
+    function openModal() {
+        document.getElementById('modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
+
+    function swapImages(smallImg) {
+        var largeImage = document.getElementById('largeImage');
+        var tempSrc = largeImage.src;
+        largeImage.src = smallImg.src;
+        smallImg.src = tempSrc;
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+            const COMPRARBtn = document.getElementById('COMPRAR');
+
+            COMPRARBtn.addEventListener('click', function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const nomeProduto = urlParams.get('nome');
+                const descricaoProduto = urlParams.get('descricao');
+                const precoProduto = urlParams.get('preco');
+                const imagemProduto = urlParams.get('imagem');
+
+                const carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+                carrinho.push(produto);
+                sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+                alert('Produto adicionado ao carrinho!');
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+    const COMPRARBtn = document.getElementById('COMPRAR');
+
+    COMPRARBtn.addEventListener('click', function() {       
+        const nomeProduto = document.querySelector('.title').textContent.trim();        
+        const descricaoProduto = document.querySelector('.section-content p').textContent.trim();
+        const precoProduto = document.querySelector('.price-total').textContent.trim();        
+        const imagemProduto = document.getElementById('largeImage').src;
+
+        const produto = {
+            nome: nomeProduto,
+            descricao: descricaoProduto,
+            preco: precoProduto,
+            imagem: imagemProduto
+        };
+
+        const carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+        carrinho.push(produto);
+        sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+        alert('Produto adicionado ao carrinho!');
+    });
+});
+
+</script>
+</body>
+</html>

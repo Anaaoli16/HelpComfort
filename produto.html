@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Produto</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+    <header>
+        <h1>Detalhes do Produto</h1>
+    </header>
+    <main>
+        <div id="produto-detalhes"></div>
+        <button id="adicionar-carrinho">Adicionar ao Carrinho</button>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const adicionarCarrinhoBtn = document.getElementById('adicionar-carrinho');
+
+            adicionarCarrinhoBtn.addEventListener('click', function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const nomeProduto = urlParams.get('nome');
+                const descricaoProduto = urlParams.get('descricao');
+                const precoProduto = urlParams.get('preco');
+                const imagemProduto = urlParams.get('imagem');
+
+                const produto = {
+                    
+                    preco: precoProduto
+                    
+                };
+
+                const carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+                carrinho.push(produto);
+                sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+                alert('Produto adicionado ao carrinho!');
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+

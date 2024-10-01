@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho - HelpComfort</title>
+
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        .carrinho-container {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .carrinho-container h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .produto-carrinho {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .produto-carrinho img {
+            max-width: 200px; 
+            height: 320px; 
+            margin-right: 10px;
+        }
+
+        .carrinho-container {
+            width: 600px;
+            padding: 20px;
+        }
+
+        #carrinho-vazio {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+            margin-top: 20px;
+        }
+
+        #continuar-comprando,
+        #finalizar-compra {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        #continuar-comprando:hover,
+        #finalizar-compra:hover {
+            background-color: #555;
+        }
+
+        #finalizar-compra.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #finalizar-compra:hover.disabled {
+            background-color: #ccc;
+        }
+
+        #finalizar-compra.enabled {
+            background-color: #555151; 
+            margin-bottom: 0; 
+        }
+
+        #finalizar-compra.enabled:hover {
+            background-color: #5a4f50; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="detalhe"> </div>
+  
+        <ul id="menu-h">
+            <li><a href="index 1.html">HOMEM</a></li>
+            <li><a href="index 3.html">MULHER</a></li>
+            <li><a href="#">NOSSA TECNOLOGIA</a></li>
+            <li><a href="#" class="red">SALE</a></li>
+            <li><a href="#">AJUDA</a></li>
+            <li>
+                <a href="#" id="searchToggle">
+                    <img src="images/lupa.png" alt="Lupa">
+                </a>
+                <div id="searchBox" style="display: none;">
+                    <input type="text" placeholder="Pesquisar...">
+                </div>
+            </li>
+            <li><a href="carrinho.html"><img src="images/sacola-de-compras.png" alt="Sacola"></a></li>
+            <li><a href="index 2.html"><img src="images/do-utilizador.png" alt="Perfil"></a></li>
+        </ul>
+    </header>
+
+    <div class="carrinho-container">
+        <h1>Seu Carrinho</h1>
+        <div id="carrinho-produtos">
+            
+        </div>
+        <p id="carrinho-vazio">O seu carrinho está vazio.</p> 
+        <button id="continuar-comprando">Continuar Comprando</button>
+        <button id="finalizar-compra" class="disabled">Finalizar Compra</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carrinhoProdutos = document.getElementById('carrinho-produtos');
+            const carrinhoVazio = document.getElementById('carrinho-vazio');
+            const continuarComprandoBtn = document.getElementById('continuar-comprando');
+            const finalizarCompraBtn = document.getElementById('finalizar-compra');
+
+            const produtosCarrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+
+            if (produtosCarrinho.length > 0) {
+                carrinhoVazio.style.display = 'none';
+                produtosCarrinho.forEach((produto, index) => {
+                    const produtoElemento = document.createElement('div');
+                    produtoElemento.classList.add('produto-carrinho');
+                    produtoElemento.innerHTML = `
+                        <img src="${produto.imagem}" alt="${produto.nome}">
+                        <div>
+                            <h3>${produto.nome}</h3>
+                            <p>${produto.descricao}</p>
+                            <p>Preço: ${produto.preco}</p>
+                            <button onclick="removerProduto(${index})">Remover</button>
+                        </div>
+                    `;
+                    carrinhoProdutos.appendChild(produtoElemento);
+                });
+
+                finalizarCompraBtn.classList.remove('disabled');
+                finalizarCompraBtn.classList.add('enabled');
+
+            } else {
+                carrinhoVazio.style.display = 'block';
+            }
+
+            continuarComprandoBtn.addEventListener('click', function() {
+                window.location.href = 'index 1.html'; 
+            });
+
+            finalizarCompraBtn.addEventListener('click', function() {
+                if (produtosCarrinho.length > 0) {
+                window.location.href = 'finalizar-compra.html'; 
+            } else {
+            alert('Adicione produtos ao carrinho antes de finalizar a compra.');
+    }        
+        });
+        function removerProduto(index) {
+            let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+            carrinho.splice(index, 1); 
+            sessionStorage.setItem('carrinho', JSON.stringify(carrinho)); 
+            location.reload(); 
+        };       
+});
+    </script>
+</body>
+</html>

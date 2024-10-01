@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Funcionário</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+    h1 {
+      font-size: 24px;
+      color: #333;
+    }
+    .form-wrapper {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-wrapper">
+    <h1>Login Funcionário</h1>
+    <form id="employeeLoginForm">
+      <label for="employeeId">ID do Funcionário:</label>
+      <input type="text" id="employeeId" name="employeeId" placeholder="Digite seu ID de funcionário" required>
+
+      <label for="password">Senha:</label>
+      <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('employeeLoginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      // Simulação de validação de login (substitua com lógica real de autenticação)
+      const employeeId = document.getElementById('employeeId').value;
+      const password = document.getElementById('password').value;
+
+      if (employeeId && password) { // Substitua com validação real
+        window.location.href = 'acessorestrito.html'; // Redireciona para a página de acesso restrito
+      } else {
+        alert('Por favor, preencha todos os campos.');
+      }
+    });
+  </script>
+</body>
+</html>
